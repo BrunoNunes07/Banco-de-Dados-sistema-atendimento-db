@@ -1,4 +1,3 @@
-# Banco-de-Dados-sistema-atendimento-db
 # Sistema de Atendimento
 
 ## Objetivo
@@ -8,12 +7,14 @@ filas, atendentes e clientes atendidos.
 ## Público-alvo
 Pequenas e médias empresas que precisam organizar filas de atendimento
 (ex: suporte técnico, recepção, call center).
+
+## Modelo de Dados
+
 ```mermaid
 erDiagram
     PESSOAS ||--o{ ATENDIMENTOS : "é cliente em"
     PESSOAS ||--o{ ATENDIMENTOS : "atende"
     FILAS ||--o{ ATENDIMENTOS : "ocorre em"
-    PESSOAS }o--o{ FILAS : "atua em"
 
     PESSOAS {
         int id PK
@@ -33,3 +34,15 @@ erDiagram
         timestamp data_hora
     }
 ```
+
+## Scripts
+
+Os scripts SQL estão organizados na pasta `scripts/`:
+- `create_table_*.sql` — criação das tabelas (DDL)
+- `insert_into_*.sql` — inserção de dados de exemplo (DML)
+
+## Validação de integridade
+
+Foi testado que o comando `DELETE` em uma pessoa referenciada em `atendimentos`
+é bloqueado pelo PostgreSQL, respeitando a chave estrangeira (FK) e garantindo
+a integridade referencial do banco.
